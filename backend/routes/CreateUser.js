@@ -8,14 +8,14 @@ const jwt = require('jsonwebtoken');
 const jwtSecret = "WelcometoDigINfoodwebsite#$%"
 
 router.post("/createuser", [
-    body('Name', 'Name is too small').isLength({ min: 5 }).withMessage('Name is too small'),
-    body('Email', 'Incorrect Email Address').isEmail().withMessage('Name is too small'),
-    body('Password', 'Password is too small').isLength({ min: 5 }).withMessage('Password is too small')
+    body('Name').isLength({ min: 5 }).withMessage('Name is too small. Give Minimum 5 Characters.'),
+    body('Email').isEmail().withMessage('Invalid Email Address'),
+    body('Password').isLength({ min: 5 }).withMessage('Password is too small. Give Minimum 5 Characters.')
 ]
     , async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(200).json({ message: "Invalid or Incomplete Credentials." });
+            return res.status(200).json({ message: errors.array()[0].msg });
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -31,25 +31,24 @@ router.post("/createuser", [
                 Email: req.body.Email,
                 Password: securedPassword,
                 Location: req.body.Location
-
             });
             res.json({ success: true });
         }
         catch (error) {
             console.log(error)
-            res.json({ message: "Invalid Credentials." });
+            res.json({ message: "Invalid Credentials" });
         }
     })
 
 
 router.post("/signinuser", [
-    body('Email', 'Incorrect Email Address').isEmail(),
-    body('Password', 'Password is too small').isLength({ min: 5 })
+    body('Email').isEmail().withMessage('Invalid Email Address'),
+    body('Password').isLength({ min: 5 }).withMessage('Password is too small. Give Minimum 5 Characters.')
 ]
     , async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(200).json({ message: "Invalid or Incomplete Credentials." });
+            return res.status(200).json({ message: errors.array()[0].msg });
         }
         try {
             const userEmail = await user.findOne({ Email: req.body.Email })
@@ -58,7 +57,7 @@ router.post("/signinuser", [
             }
             const pwdCompare = await bcrypt.compare(req.body.Password, userEmail.Password)
             if (!pwdCompare) {
-                return res.status(200).json({ message: "Incorrect Password." });
+                return res.status(200).json({ message: "Incorrect Password" });
             }
 
             const data = { user: { id: userEmail.id } }
@@ -67,7 +66,7 @@ router.post("/signinuser", [
 
         } catch (error) {
             console.log(error)
-            res.json({ message: "Invalid Credentials." });
+            res.json({ message: "Invalid Credentials" });
         }
     })
 
