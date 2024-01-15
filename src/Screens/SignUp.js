@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack';
 
+
 export default function SignUp() {
     const [credentials, setcredentials] = useState({ Name: "", Email: "", Password: "", Location: "" })
     const navigate = useNavigate();

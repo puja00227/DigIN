@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Card(props) {
     const navigate = useNavigate();
-    const { enqueueSnackbar } = useSnackbar()
+    const { enqueueSnackbar } = useSnackbar();
     let options = props.options;
     let priceOptions = Object.keys(options)
 

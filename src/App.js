@@ -4,10 +4,10 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { SnackbarProvider } from 'notistack';
 import Home from './Screens/Home';
 import Login from './Screens/Login';
 import SignUp from './Screens/SignUp';
-import { SnackbarProvider } from 'notistack';
 import { CartProvider } from './Components/ContextReducer';
 import Start from './Screens/Start';
 import MyOrder from './Screens/MyOrder';
