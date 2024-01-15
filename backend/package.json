@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+<<<<<<< HEAD
   "scripts": {
+=======
+   "scripts": {
+>>>>>>> origin/master
     "dev": "nodemon index.js",
     "build" : "npm i"
   },
