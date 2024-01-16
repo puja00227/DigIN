@@ -19,7 +19,7 @@ export default function Cart() {
     const handleCheckOut = async () => {
         let userEmail = localStorage.getItem("userEmail");
         try {
-            const response = await axios.post("http://localhost:5551/api/OrderData",
+            const response = await axios.post("https://diginbackend.onrender.com/api/OrderData",
                 { order_data: data, Email: userEmail, order_date: new Date().toDateString(), totalP: totalPrice1 },
                 { headers: { 'Content-Type': 'application/json' } });
             if (response.status === 200) {

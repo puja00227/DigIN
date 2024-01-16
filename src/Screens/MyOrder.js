@@ -18,7 +18,7 @@ export default function MyOrder() {
     const [orderData, setOrderData] = useState({})
     const fetchMyOrder = async () => {
         try {
-            const response = await axios.post("http://localhost:5551/api/myOrderData",
+            const response = await axios.post("https://diginbackend.onrender.com/api/myOrderData",
                 { email: localStorage.getItem('userEmail') });
             const data = response.data;
             setOrderData(data);

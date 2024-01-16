@@ -29,7 +29,7 @@ export default function Home() {
 
   const loadData = async () => {
     try {
-      const response = await axios.post("http://localhost:5551/api/foodData")
+      const response = await axios.post("https://diginbackend.onrender.com/api/foodData")
       const data1 = response.data;
       setFoodItem(data1[0])
       setFoodCat(data1[1])
